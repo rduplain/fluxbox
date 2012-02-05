@@ -1451,7 +1451,8 @@ void FluxboxWindow::setFullscreenLayer() {
         getOnHead() != foc->getOnHead() ||
         (foc->winClient().isTransient() &&
          foc->winClient().transientFor()->fbwindow() == this)) {
-        moveToLayer(::ResourceLayer::ABOVE_DOCK);
+        // rduplain customization: allow pinning windows above a fullscreen window.
+        moveToLayer(::ResourceLayer::BOTTOM);
     } else {
         moveToLayer(::ResourceLayer::DESKTOP);
     }
@@ -1765,7 +1766,8 @@ void FluxboxWindow::setFocusFlag(bool focus) {
     }
 
     if (m_state.fullscreen && focus) {
-        moveToLayer(::ResourceLayer::ABOVE_DOCK);
+        // rduplain customization: allow pinning windows above a fullscreen window.
+        moveToLayer(::ResourceLayer::BOTTOM);
         leave(screen().focusedWindowSig());
     }
 
